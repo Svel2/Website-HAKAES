@@ -50,23 +50,23 @@ export default function Service() {
         {services.map((service, index) => (
           <div
             key={index}
-            className="bg-gray-50 dark:bg-gray-800 rounded-2xl p-4 sm:p-5 lg:p-6 shadow-lg border border-gray-200 dark:border-gray-700 hover:shadow-2xl transition-all duration-300 flex flex-col"
+            className="bg-gray-50  rounded-2xl p-4 sm:p-5 lg:p-6 shadow-lg border border-gray-200  hover:shadow-2xl transition-all duration-300 flex flex-col"
           >
-            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#ff0000] dark:bg-gray-700 rounded-lg flex items-center justify-center mb-3 sm:mb-4">
+            <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#ff0000]  rounded-lg flex items-center justify-center mb-3 sm:mb-4">
               <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={2} d={service.icon} />
               </svg>
             </div>
-            <h3 className="font-[family-name:var(--font-inter)] text-base sm:text-lg lg:text-xl font-bold text-gray-900 dark:text-white mb-2 sm:mb-3">
+            <h3 className="font-[family-name:var(--font-inter)] text-base sm:text-lg lg:text-xl font-bold text-gray-900  mb-2 sm:mb-3">
               {service.title}
             </h3>
-            <p className="font-[family-name:var(--font-inter)] text-xs sm:text-sm leading-relaxed text-gray-600 dark:text-gray-300 mb-3 sm:mb-4 lg:mb-5 flex-grow">
+            <p className="font-[family-name:var(--font-inter)] text-xs sm:text-sm leading-relaxed text-gray-600  mb-3 sm:mb-4 lg:mb-5 flex-grow">
               {service.description}
             </p>
             <div className="mt-auto">
               <Link
                 href={`/services/${service.slug}`}
-                className="inline-block bg-[#ff0000] dark:bg-gray-700 hover:bg-gray-800 dark:hover:bg-gray-600 text-white font-[family-name:var(--font-inter)] font-semibold text-xs sm:text-sm px-4 sm:px-5 py-2 sm:py-2.5 rounded-full transition-all duration-300 shadow-md hover:shadow-lg w-full sm:w-auto text-center"
+                className="inline-block bg-[#ff0000]  hover:bg-gray-800  text-white font-[family-name:var(--font-inter)] font-semibold text-xs sm:text-sm px-4 sm:px-5 py-2 sm:py-2.5 rounded-full transition-all duration-300 shadow-md hover:shadow-lg w-full sm:w-auto text-center"
               >
                 Learn More
               </Link>

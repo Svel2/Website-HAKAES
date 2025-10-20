@@ -20,10 +20,10 @@ export default function InnercityServicesPage() {
             <h2 className="font-[family-name:var(--font-inter)] text-3xl sm:text-4xl font-bold text-gray-900">
               Rapid Jabodetabek Coverage
             </h2>
-            <p className="font-[family-name:var(--font-inter)] text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
+            <p className="font-[family-name:var(--font-inter)] text-base sm:text-lg leading-relaxed text-gray-600 ">
               Our Innercity Services specialize in fast delivery within the Greater Jakarta area (Jabodetabek) with a 60km radius coverage. With 13 dedicated delivery teams, we ensure your packages reach their destination on the same day.
             </p>
-            <p className="font-[family-name:var(--font-inter)] text-base sm:text-lg leading-relaxed text-gray-600 dark:text-gray-300">
+            <p className="font-[family-name:var(--font-inter)] text-base sm:text-lg leading-relaxed text-gray-600 ">
               Whether you need urgent spare parts delivery or regular document transportation, our innercity fleet is ready to serve with guaranteed punctuality and safety.
             </p>
           </div>
@@ -95,7 +95,7 @@ export default function InnercityServicesPage() {
 
       {/* Coverage Stats */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
-        <h2 className="font-[family-name:var(--font-inter)] text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-gray-900 dark:text-white mb-8 sm:mb-12">
+        <h2 className="font-[family-name:var(--font-inter)] text-3xl sm:text-4xl lg:text-5xl font-bold text-center text-gray-900  mb-8 sm:mb-12">
           Service Performance
         </h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-4 gap-6 sm:gap-8">

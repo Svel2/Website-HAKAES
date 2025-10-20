@@ -42,12 +42,12 @@ export default function Home() {
     <section className="bg-white max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 sm:pt-20 pb-12 sm:pb-16">
       <div className="flex flex-col lg:flex-row items-center gap-8 sm:gap-12 lg:gap-16">
         <div className="flex-1 w-full space-y-4 sm:space-y-6 text-center lg:text-left">
-          <h1 className="font-[family-name:var(--font-inter)] text-3xl sm:text-4xl lg:text-[40px] font-bold italic leading-tight text-gray-900 dark:text-white">
+          <h1 className="font-[family-name:var(--font-inter)] text-3xl sm:text-4xl lg:text-[40px] font-bold italic leading-tight text-gray-900">
             HAKAES Logistik & Kargo
             <br />
             Delivering Trust and Efficiency
           </h1>
-          <p className="font-[family-name:var(--font-inter)] text-base sm:text-lg lg:text-[18px] leading-relaxed text-gray-600 dark:text-gray-300 max-w-xl mx-auto lg:mx-0">
+          <p className="font-[family-name:var(--font-inter)] text-base sm:text-lg lg:text-[18px] leading-relaxed text-gray-600  max-w-xl mx-auto lg:mx-0">
             HAKAES provides reliable logistics and distribution services designed to keep businesses 
             moving across Indonesia. With our dedicated team and nationwide network, we ensure every 
             package arrives safely, on time, and with care.
