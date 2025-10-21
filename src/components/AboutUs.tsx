@@ -85,43 +85,6 @@ export default function AboutUs() {
       >
         <div className="w-full max-w-[1166px] bg-gray-50 rounded-2xl sm:rounded-3xl border border-gray-200 overflow-hidden">
           <div className="flex flex-col lg:flex-row min-h-[400px] sm:min-h-[450px] lg:h-[513px]">
-            <div className="flex-1 lg:w-1/2 p-4 sm:p-6 order-2 lg:order-1 flex flex-col">
-              <div 
-                ref={scrollContainerRef}
-                onMouseDown={handleMouseDown}
-                onMouseMove={handleMouseMove}
-                onMouseUp={handleMouseUp}
-                onMouseLeave={handleMouseLeave}
-                onScroll={handleScroll}
-                className="flex gap-3 sm:gap-4 overflow-x-auto h-[240px] sm:h-[300px] lg:flex-1 snap-x snap-mandatory scrollbar-hide cursor-grab select-none"
-              >
-                {slides.map((slide, index) => (
-                  <div 
-                    key={index}
-                    className="flex-shrink-0 w-full h-full snap-center bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 flex flex-col justify-center"
-                  >
-                    <h3 className="font-[family-name:var(--font-inter)] text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
-                      {slide.title}
-                    </h3>
-                    <p className="font-[family-name:var(--font-inter)] text-sm sm:text-base lg:text-lg leading-relaxed text-gray-600">
-                      {slide.content}
-                    </p>
-                  </div>
-                ))}
-              </div>
-              
-              <div className="flex justify-center gap-2 mt-4 pb-2">
-                {slides.map((_, index) => (
-                  <div 
-                    key={index}
-                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
-                      activeSlide === index ? 'bg-[#FF0000] w-8' : 'bg-gray-400'
-                    }`}
-                  />
-                ))}
-              </div>
-            </div>
-
             <div className="flex-1 lg:w-1/2 p-4 sm:p-6 lg:p-12 flex flex-col justify-center order-1 lg:order-2">
               <h2 className="font-[family-name:var(--font-inter)] text-3xl sm:text-4xl lg:text-[40px] font-bold italic leading-tight text-gray-900 mb-4 sm:mb-6">
                 About Us
@@ -163,7 +126,45 @@ export default function AboutUs() {
                   </div>
                 </div>
               </div>
-            </div>
+          </div>
+          
+
+            <div className="flex-1 lg:w-1/2 p-4 sm:p-6 order-2 lg:order-2 flex flex-col">
+              <div 
+                ref={scrollContainerRef}
+                onMouseDown={handleMouseDown}
+                onMouseMove={handleMouseMove}
+                onMouseUp={handleMouseUp}
+                onMouseLeave={handleMouseLeave}
+                onScroll={handleScroll}
+                className="flex gap-3 sm:gap-4 overflow-x-auto h-[240px] sm:h-[300px] lg:flex-1 snap-x snap-mandatory scrollbar-hide cursor-grab select-none"
+              >
+                {slides.map((slide, index) => (
+                  <div 
+                    key={index}
+                    className="flex-shrink-0 w-full h-full snap-center bg-white rounded-xl sm:rounded-2xl p-4 sm:p-6 lg:p-8 flex flex-col justify-center"
+                  >
+                    <h3 className="font-[family-name:var(--font-inter)] text-xl sm:text-2xl lg:text-3xl font-bold text-gray-900 mb-3 sm:mb-4">
+                      {slide.title}
+                    </h3>
+                    <p className="font-[family-name:var(--font-inter)] text-sm sm:text-base lg:text-lg leading-relaxed text-gray-600">
+                      {slide.content}
+                    </p>
+                  </div>
+                ))}
+              </div>
+              
+              <div className="flex justify-center gap-2 mt-4 pb-2">
+                {slides.map((_, index) => (
+                  <div 
+                    key={index}
+                    className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                      activeSlide === index ? 'bg-[#FF0000] w-8' : 'bg-gray-400'
+                    }`}
+                  />
+                ))}
+              </div>
+          </div>
           </div>
         </div>
       </motion.div>
