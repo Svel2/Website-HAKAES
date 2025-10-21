@@ -1,6 +1,19 @@
+"use client";
+
 import Link from "next/link";
+import { useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { motion } from "framer-motion";
 
 export default function Service() {
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      offset: 100,
+      once: true,
+    });
+  }, []);
   const services = [
     {
       title: "Logistic & Distribution",
@@ -42,15 +55,25 @@ export default function Service() {
 
   return (
     <section id="services" className="bg-[#bc0000] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
-      <h2 className="font-[family-name:var(--font-inter)] text-3xl sm:text-4xl lg:text-[48px] font-bold text-center text-white mb-8 sm:mb-10 lg:mb-12">
+      <motion.h2 
+        className="font-[family-name:var(--font-inter)] text-3xl sm:text-4xl lg:text-[48px] font-bold text-center text-white mb-8 sm:mb-10 lg:mb-12"
+        initial={{ opacity: 0, y: -20 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
         Our Service
-      </h2>
+      </motion.h2>
 
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 sm:gap-5 lg:gap-6">
         {services.map((service, index) => (
-          <div
+          <motion.div
             key={index}
             className="bg-gray-50  rounded-2xl p-4 sm:p-5 lg:p-6 shadow-lg border border-gray-200  hover:shadow-2xl transition-all duration-300 flex flex-col"
+            data-aos="fade-up"
+            data-aos-delay={index * 100}
+            whileHover={{ scale: 1.05, y: -5 }}
+            transition={{ type: "spring", stiffness: 300 }}
           >
             <div className="w-10 h-10 sm:w-12 sm:h-12 bg-[#ff0000]  rounded-lg flex items-center justify-center mb-3 sm:mb-4">
               <svg className="w-5 h-5 sm:w-6 sm:h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -71,7 +94,7 @@ export default function Service() {
                 Learn More
               </Link>
             </div>
-          </div>
+          </motion.div>
         ))}
       </div>
     </section>

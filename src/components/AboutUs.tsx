@@ -1,6 +1,9 @@
 "use client";
 
-import { useRef, useCallback, useState } from "react";
+import { useRef, useCallback, useState, useEffect } from "react";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { motion } from "framer-motion";
 
 export default function AboutUs() {
   const scrollContainerRef = useRef<HTMLDivElement>(null);
@@ -8,6 +11,14 @@ export default function AboutUs() {
   const startX = useRef(0);
   const scrollLeft = useRef(0);
   const [activeSlide, setActiveSlide] = useState(0);
+
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      offset: 100,
+      once: true,
+    });
+  }, []);
 
   const handleMouseDown = useCallback((e: React.MouseEvent) => {
     if (!scrollContainerRef.current) return;
@@ -65,7 +76,13 @@ export default function AboutUs() {
 
   return (
     <section id="about" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
-      <div className="flex justify-center">
+      <motion.div 
+        className="flex justify-center"
+        initial={{ opacity: 0, y: 50 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6 }}
+        viewport={{ once: true }}
+      >
         <div className="w-full max-w-[1166px] bg-gray-50 rounded-2xl sm:rounded-3xl border border-gray-200 overflow-hidden">
           <div className="flex flex-col lg:flex-row min-h-[400px] sm:min-h-[450px] lg:h-[513px]">
             <div className="flex-1 lg:w-1/2 p-4 sm:p-6 order-2 lg:order-1 flex flex-col">
@@ -149,7 +166,7 @@ export default function AboutUs() {
             </div>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

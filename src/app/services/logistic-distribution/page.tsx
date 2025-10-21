@@ -1,4 +1,6 @@
-  export default function LogisticDistributionPage() {
+"use client";
+
+export default function LogisticDistributionPage() {
   return (
     <div className="min-h-screen bg-white ">
       {/* Hero Section */}

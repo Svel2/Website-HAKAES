@@ -3,6 +3,7 @@
 import Link from "next/link";
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
+import { motion } from "framer-motion";
 
 export default function Navbar() {
   const [isOpen, setIsOpen] = useState(false);
@@ -31,14 +32,23 @@ export default function Navbar() {
   };
 
   return (
-    <nav className="sticky top-2 sm:top-4 z-50 mx-auto max-w-5xl px-2 sm:px-4">
+    <motion.nav 
+      className="sticky top-2 sm:top-4 z-50 mx-auto max-w-5xl px-2 sm:px-4"
+      initial={{ opacity: 0, y: -20 }}
+      animate={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.5 }}
+    >
       <div className="bg-white backdrop-blur-md shadow-lg border border-gray-200" style={{ borderRadius: '30px' }}>
         <div className="flex justify-between items-center h-14 sm:h-16 px-4 sm:px-6">
-          <div className="flex items-center">
+          <motion.div 
+            className="flex items-center"
+            whileHover={{ scale: 1.05 }}
+            transition={{ type: "spring", stiffness: 400 }}
+          >
             <Link href="/" className="text-xl sm:text-2xl font-bold text-gray-900">
               <img src="/logo/LOGO.svg" alt="Logo HAKAES" className="h-8 sm:h-10" />
             </Link>
-          </div>
+          </motion.div>
 
           <div className="hidden md:flex flex-1 justify-center">
             <div className="flex items-center space-x-1">
@@ -153,6 +163,6 @@ export default function Navbar() {
           </div>
         </div>
       )}
-    </nav>
+    </motion.nav>
   );
 }

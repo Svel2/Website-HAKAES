@@ -1,6 +1,9 @@
 "use client";
 
-import { useState } from "react";
+import { useState, useEffect } from "react";
+import { motion } from "framer-motion";
+import AOS from "aos";
+import "aos/dist/aos.css";
 
 export default function ContactUs() {
   const [formData, setFormData] = useState({
@@ -8,6 +11,14 @@ export default function ContactUs() {
     email: "",
     message: ""
   });
+
+  useEffect(() => {
+    AOS.init({
+      duration: 800,
+      offset: 100,
+      once: true,
+    });
+  }, []);
 
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
@@ -29,7 +40,13 @@ export default function ContactUs() {
         Contact Us
       </h2>
 
-      <div className="bg-[#bc0000] rounded-2xl sm:rounded-3xl overflow-hidden">
+      <motion.div 
+        className="bg-gradient-to-r from-[#FF4141] to-[#BC1414] rounded-2xl sm:rounded-3xl overflow-hidden"
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.6, delay: 0.1 }}
+        viewport={{ once: true }}
+      >
         <div className="flex flex-col lg:flex-row gap-6 sm:gap-8 lg:gap-0">
           <div className="lg:w-1/2 p-6 sm:p-8 lg:p-10">
             <div className="relative w-full h-[300px] sm:h-[400px] lg:h-full lg:min-h-[550px] bg-gray-800 rounded-xl sm:rounded-2xl overflow-hidden">
@@ -103,7 +120,7 @@ export default function ContactUs() {
             </form>
           </div>
         </div>
-      </div>
+      </motion.div>
     </section>
   );
 }

@@ -1,3 +1,5 @@
+"use client";
+
 export default function SameDayServicePage() {
   return (
     <div className="min-h-screen bg-white">
