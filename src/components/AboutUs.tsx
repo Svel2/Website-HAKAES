@@ -15,7 +15,7 @@ export default function AboutUs() {
   useEffect(() => {
     AOS.init({
       duration: 800,
-      offset: 100,
+      offset: 50,
       once: true,
     });
   }, []);
@@ -75,7 +75,7 @@ export default function AboutUs() {
   ];
 
   return (
-    <section id="about" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+    <section id="about" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 scroll-mt-20">
       <motion.div 
         className="flex justify-center"
         initial={{ opacity: 0, y: 50 }}
@@ -84,7 +84,7 @@ export default function AboutUs() {
         viewport={{ once: true }}
       >
         <div className="w-full max-w-[1166px] bg-gray-50 rounded-2xl sm:rounded-3xl border border-gray-200 overflow-hidden">
-          <div className="flex flex-col lg:flex-row min-h-[400px] sm:min-h-[450px] lg:h-[513px]">
+          <div className="flex flex-col lg:flex-row min-h-[500px] sm:min-h-[450px] lg:h-[513px]">
             <div className="flex-1 lg:w-1/2 p-4 sm:p-6 lg:p-12 flex flex-col justify-center order-1 lg:order-2">
               <h2 className="font-[family-name:var(--font-inter)] text-3xl sm:text-4xl lg:text-[40px] font-bold italic leading-tight text-gray-900 mb-4 sm:mb-6">
                 About Us
