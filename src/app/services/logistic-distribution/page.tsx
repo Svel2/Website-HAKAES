@@ -1,18 +1,35 @@
 "use client";
 
+import { motion } from 'framer-motion';
+
 export default function LogisticDistributionPage() {
   return (
     <div className="min-h-screen bg-white ">
       {/* Hero Section */}
       <section className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-24 sm:pt-28 lg:pt-32 pb-12 sm:pb-16 lg:pb-20">
-        <div className="text-center space-y-4 sm:space-y-6">
-          <h1 className="font-[family-name:var(--font-inter)] text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 ">
+        <motion.div 
+          initial={{ opacity: 0, y: 20 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+          className="text-center space-y-4 sm:space-y-6"
+        >
+          <motion.h1 
+            className="font-[family-name:var(--font-inter)] text-4xl sm:text-5xl lg:text-6xl font-bold text-gray-900 "
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.2 }}
+          >
             Logistic & Distribution
-          </h1>
-          <p className="font-[family-name:var(--font-inter)] text-lg sm:text-xl lg:text-2xl text-gray-600  max-w-3xl mx-auto">
+          </motion.h1>
+          <motion.p 
+            className="font-[family-name:var(--font-inter)] text-lg sm:text-xl lg:text-2xl text-gray-600  max-w-3xl mx-auto"
+            initial={{ opacity: 0, y: 30 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, delay: 0.4 }}
+          >
             Comprehensive logistics services across Indonesia with advanced management systems
-          </p>
-        </div>
+          </motion.p>
+        </motion.div>
       </section>
 
       {/* Overview Section */}
