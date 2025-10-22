@@ -39,21 +39,14 @@ export default function LogisticDistributionPage() {
             <h2 className="font-[family-name:var(--font-inter)] text-3xl sm:text-4xl font-bold text-gray-900 ">
               Complete Logistics Solutions
             </h2>
-            <p className="font-[family-name:var(--font-inter)] text-base sm:text-lg leading-relaxed text-gray-600 ">
+            <p className="font-[family-name:var(--font-inter)] text-base sm:text-lg leading-relaxed text-gray-600 text-justify">
               HAKAES provides end-to-end logistics and distribution services designed specifically for spare parts management and nationwide delivery operations. Our 1,400 sqm warehouse facility in Jakarta serves as the central hub for efficient storage and distribution.
             </p>
-            <p className="font-[family-name:var(--font-inter)] text-base sm:text-lg leading-relaxed text-gray-600 ">
+            <p className="font-[family-name:var(--font-inter)] text-base sm:text-lg leading-relaxed text-gray-600 text-justify">
               With advanced logistics management systems and strategic stock locations across Indonesia, we ensure optimal inventory control and rapid deployment to any destination nationwide.
             </p>
           </div>
 
-          <div className="bg-gradient-to-br from-[#BC0000] to-[#7C0000] rounded-2xl sm:rounded-3xl p-8 sm:p-12">
-            <div className="flex items-center justify-center h-[300px] sm:h-[400px]">
-              <svg className="w-32 h-32 sm:w-40 sm:h-40 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path strokeLinecap="round" strokeLinejoin="round" strokeWidth={1.5} d="M20 7l-8-4-8 4m16 0l-8 4m8-4v10l-8 4m0-10L4 7m8 4v10M4 7v10l8 4" />
-              </svg>
-            </div>
-          </div>
         </div>
       </section>
 

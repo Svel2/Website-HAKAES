@@ -1,6 +1,4 @@
 import { NextRequest, NextResponse } from "next/server";
-import { sendContactFormEmails } from "@/lib/email";
-
 const RATE_LIMIT_WINDOW_MS = 60_000;
 const RATE_LIMIT_MAX_REQUESTS = 3;
 
@@ -10,6 +8,16 @@ type RateLimitEntry = {
 };
 
 const rateLimitStore = new Map<string, RateLimitEntry>();
+
+type GoogleScriptPayload = {
+  timestamp: string;
+  firstName: string;
+  lastName: string;
+  email: string;
+  message: string;
+  ipAddress: string;
+  userAgent?: string;
+};
 
 function getClientIdentifier(request: NextRequest) {
   const xRealIp = request.headers.get("x-real-ip");
@@ -26,6 +34,34 @@ function getClientIdentifier(request: NextRequest) {
   }
 
   return "unknown";
+}
+
+async function forwardToGoogleScript(data: GoogleScriptPayload) {
+  const webhookUrl = 'https://script.google.com/macros/s/AKfycbw9riaHLSMZJaS9nZL7ctww7QoGJdnQgyz9Hvd_4cJqAyi_r2L1esGAhtAehUgUURwi/exec';
+
+  if (!webhookUrl) {
+    throw new Error("GOOGLE_APPS_SCRIPT_URL is not configured.");
+  }
+
+  try {
+    const response = await fetch(webhookUrl, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(data),
+    });
+
+    if (!response.ok && response.type !== "opaque") {
+      throw new Error(`Webhook responded with status ${response.status}`);
+    }
+  } catch (error) {
+    if (process.env.NODE_ENV !== "production") {
+      console.error("[Contact] gagal mengirim data ke Google Apps Script:", error);
+    }
+
+    throw new Error("GOOGLE_APPS_SCRIPT_FAILED");
+  }
 }
 
 function isRateLimited(identifier: string) {
@@ -53,46 +89,6 @@ function isRateLimited(identifier: string) {
   return false;
 }
 
-async function verifyRecaptcha(token: string, remoteIp: string) {
-  const secret = process.env.RECAPTCHA_SECRET_KEY;
-
-  if (!secret) {
-    throw new Error("RECAPTCHA_SECRET_KEY is not configured.");
-  }
-
-  const params = new URLSearchParams();
-  params.append("secret", secret);
-  params.append("response", token);
-  if (remoteIp && remoteIp !== "unknown") {
-    params.append("remoteip", remoteIp);
-  }
-
-  const response = await fetch("https://www.google.com/recaptcha/api/siteverify", {
-    method: "POST",
-    headers: {
-      "Content-Type": "application/x-www-form-urlencoded",
-    },
-    body: params.toString(),
-  });
-
-  if (!response.ok) {
-    throw new Error("Failed to verify CAPTCHA.");
-  }
-
-  const data = (await response.json()) as {
-    success: boolean;
-    score?: number;
-    action?: string;
-    "error-codes"?: string[];
-  };
-
-  if (!data.success || (typeof data.score === "number" && data.score < 0.5)) {
-    return false;
-  }
-
-  return true;
-}
-
 export async function POST(request: NextRequest) {
   if (!request.headers.get("content-type")?.includes("application/json")) {
     return NextResponse.json(
@@ -102,11 +98,10 @@ export async function POST(request: NextRequest) {
   }
 
   let payload: {
-    name?: unknown;
+    firstName?: unknown;
+    lastName?: unknown;
     email?: unknown;
-    phone?: unknown;
     message?: unknown;
-    token?: unknown;
   };
 
   try {
@@ -120,14 +115,18 @@ export async function POST(request: NextRequest) {
 
   const errors: Record<string, string> = {};
 
-  const name = typeof payload.name === "string" ? payload.name.trim() : "";
+  const firstName = typeof payload.firstName === "string" ? payload.firstName.trim() : "";
+  const lastName = typeof payload.lastName === "string" ? payload.lastName.trim() : "";
+  const name = [firstName, lastName].filter(Boolean).join(" ").trim();
   const email = typeof payload.email === "string" ? payload.email.trim().toLowerCase() : "";
-  const phone = typeof payload.phone === "string" ? payload.phone.trim() : undefined;
   const message = typeof payload.message === "string" ? payload.message.trim() : "";
-  const token = typeof payload.token === "string" ? payload.token : "";
 
-  if (!name || name.length < 2) {
-    errors.name = "Nama wajib diisi minimal 2 karakter.";
+  if (!firstName || firstName.length < 2) {
+    errors.firstName = "Nama depan wajib diisi minimal 2 karakter.";
+  }
+
+  if (lastName && lastName.length < 2) {
+    errors.lastName = "Nama belakang minimal 2 karakter atau kosongkan.";
   }
 
   const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/;
@@ -135,16 +134,8 @@ export async function POST(request: NextRequest) {
     errors.email = "Email tidak valid.";
   }
 
-  if (phone && phone.length < 6) {
-    errors.phone = "Nomor telepon tidak valid.";
-  }
-
   if (!message || message.length < 10) {
     errors.message = "Pesan wajib diisi minimal 10 karakter.";
-  }
-
-  if (!token) {
-    errors.token = "Verifikasi CAPTCHA diperlukan.";
   }
 
   if (Object.keys(errors).length > 0) {
@@ -161,30 +152,24 @@ export async function POST(request: NextRequest) {
   }
 
   try {
-    const captchaVerified = await verifyRecaptcha(token, identifier);
-
-    if (!captchaVerified) {
-      return NextResponse.json(
-        { success: false, message: "Verifikasi CAPTCHA gagal." },
-        { status: 400 },
-      );
-    }
-
-    await sendContactFormEmails({
-      name,
+    await forwardToGoogleScript({
+      timestamp: new Date().toISOString(),
+      firstName: firstName || name,
+      lastName,
       email,
-      phone,
       message,
+      ipAddress: identifier,
+      userAgent: request.headers.get("user-agent") ?? undefined,
     });
 
     return NextResponse.json({ success: true });
   } catch (error) {
-    let message = "Terjadi kesalahan saat memproses permintaan.";
-
-    if (error instanceof Error && error.message === "EMAIL_SENDING_FAILED") {
-      message =
-        "Pengiriman email gagal. Mohon periksa konfigurasi SMTP dan pastikan alamat pengirim sudah diverifikasi.";
-    }
+    const message =
+      error instanceof Error && error.message === "GOOGLE_APPS_SCRIPT_FAILED"
+        ? "Gagal mengirim data ke Google Apps Script. Silakan coba lagi nanti."
+        : error instanceof Error
+          ? error.message
+          : "Terjadi kesalahan saat memproses permintaan.";
 
     return NextResponse.json(
       { success: false, message },
