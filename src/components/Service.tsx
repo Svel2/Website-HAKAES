@@ -54,7 +54,7 @@ export default function Service() {
   ];
 
   return (
-    <section id="services" className="bg-[#bc0000] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20">
+    <section id="services" className="bg-[#bc0000] max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 scroll-mt-28 md:scroll-mt-20">
       <motion.h2 
         className="font-[family-name:var(--font-inter)] text-3xl sm:text-4xl lg:text-[48px] font-bold text-center text-white mb-8 sm:mb-10 lg:mb-12"
         initial={{ opacity: 0, y: -20 }}

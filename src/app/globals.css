@@ -33,13 +33,29 @@ body {
 /* Smooth scroll behavior */
 html {
   scroll-behavior: smooth;
-  scroll-padding-top: 100px; /* Increased for mobile */
+  scroll-padding-top: 100px; /* Default for desktop */
+  /* Prevent overscroll bounce on iOS */
+  overscroll-behavior-y: none;
 }
 
 /* Mobile-specific adjustments */
 @media (max-width: 767px) {
   html {
-    scroll-padding-top: 120px;
+    /* Much larger offset for real mobile browsers */
+    scroll-padding-top: 150px;
+  }
+  
+  /* Handle safe areas on modern phones (iPhone X+, etc) */
+  body {
+    padding-top: env(safe-area-inset-top);
+  }
+}
+
+/* Specific fix for mobile viewport */
+@supports (-webkit-touch-callout: none) {
+  /* iOS Safari specific fixes */
+  html {
+    scroll-padding-top: 160px;
   }
 }
 

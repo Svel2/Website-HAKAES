@@ -1,6 +1,7 @@
 "use client";
 
 import Link from "next/link";
+import Image from "next/image";
 import { useState } from "react";
 import { usePathname, useRouter } from "next/navigation";
 import { motion } from "framer-motion";
@@ -23,14 +24,28 @@ export default function Navbar() {
     // Jika di landing page, smooth scroll
     const element = document.querySelector(targetId) as HTMLElement;
     if (element) {
-      const headerOffset = window.innerWidth < 768 ? 100 : 80; // Account for fixed header height
+      // More aggressive offset for real mobile devices
+      // Account for mobile browser address bar + navbar height
+      const isMobile = window.innerWidth < 768;
+      const mobileAddressBarHeight = 56; // Approximate mobile browser address bar
+      const navbarHeight = isMobile ? 64 : 80;
+      const additionalOffset = isMobile ? 20 : 0; // Extra padding for mobile
+      
+      const headerOffset = isMobile 
+        ? navbarHeight + mobileAddressBarHeight + additionalOffset  // Total: ~140px for mobile
+        : navbarHeight;
+      
       const elementPosition = element.getBoundingClientRect().top;
       const offsetPosition = elementPosition + window.pageYOffset - headerOffset;
 
-      window.scrollTo({
-        top: Math.max(0, offsetPosition),
-        behavior: 'smooth'
+      // Use requestAnimationFrame for smoother scroll on mobile
+      requestAnimationFrame(() => {
+        window.scrollTo({
+          top: Math.max(0, offsetPosition),
+          behavior: 'smooth'
+        });
       });
+      
       setIsOpen(false);
     }
   };
@@ -50,7 +65,14 @@ export default function Navbar() {
             transition={{ type: "spring", stiffness: 400 }}
           >
             <Link href="/" className="text-xl sm:text-2xl font-bold text-gray-900">
-              <img src="/logo/LOGO.svg" alt="Logo HAKAES" className="h-8 sm:h-10" />
+              <Image 
+                src="/logo/LOGO.svg" 
+                alt="Logo HAKAES" 
+                width={120}
+                height={40}
+                className="h-8 sm:h-10 w-auto"
+                priority
+              />
             </Link>
           </motion.div>
 

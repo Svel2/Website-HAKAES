@@ -75,7 +75,7 @@ export default function AboutUs() {
   ];
 
   return (
-    <section id="about" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 pt-20 scroll-mt-20">
+    <section id="about" className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12 sm:py-16 lg:py-20 pt-24 md:pt-20 scroll-mt-28 md:scroll-mt-20">
       <motion.div 
         className="flex justify-center"
         initial={{ opacity: 0, y: 50 }}

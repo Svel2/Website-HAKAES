@@ -1,6 +1,7 @@
 "use client";
 
 import { useRef, useCallback } from "react";
+import Image from "next/image";
 import { motion } from "framer-motion";
 
 export default function Home() {
@@ -86,13 +87,32 @@ export default function Home() {
               className="flex overflow-x-auto h-full snap-x snap-mandatory scrollbar-hide cursor-grab select-none"
             >
               <div className="flex-shrink-0 w-full h-full snap-center relative bg-gradient-to-br from-blue-500 to-purple-600">
-                <img src="/image/Foto-1.jpg" alt="foto-home-1" className="w-full h-full object-cover" />
+                <Image 
+                  src="/image/Foto-1.jpg" 
+                  alt="HAKAES Logistics Warehouse" 
+                  fill
+                  className="object-cover"
+                  priority
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               </div>
               <div className="flex-shrink-0 w-full h-full snap-center relative bg-gradient-to-br from-green-500 to-teal-600">
-                <img src="/image/Foto-2.jpg" alt="foto-home-2" className="w-full h-full object-cover" />
+                <Image 
+                  src="/image/Foto-2.jpg" 
+                  alt="HAKAES Cargo Delivery Service" 
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               </div>
               <div className="flex-shrink-0 w-full h-full snap-center relative bg-gradient-to-br from-orange-500 to-red-600">
-                <img src="/image/Foto-3.jpg" alt="foto-home-3" className="w-full h-full object-cover" />
+                <Image 
+                  src="/image/Foto-3.jpg" 
+                  alt="HAKAES Distribution Network" 
+                  fill
+                  className="object-cover"
+                  sizes="(max-width: 768px) 100vw, 50vw"
+                />
               </div>
             </div>
             
