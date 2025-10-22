@@ -1,36 +1,93 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+HAKAES Website - Logistics & Cargo Services
+Ini adalah proyek website perusahaan logistik dan kargo, PT HAKAES Tunas Sinergi, yang dibangun menggunakan Next.js App Router dan didesain dengan antarmuka modern yang responsif.
 
-## Getting Started
+🚀 Fitur Utama
+Layanan Komprehensif: Halaman detail untuk 6+ layanan utama (Same Day, Innercity, Cargo Delivery, Logistic & Distribution, dll.).
 
-First, run the development server:
+Desain Responsif: Tampilan optimal di berbagai perangkat, dari desktop hingga mobile.
 
-```bash
+Animasi Halus (Smooth Animations): Menggunakan Framer Motion untuk transisi dan efek scroll yang mulus.
+
+Formulir Kontak (Contact Form): Dilengkapi client-side dan server-side validation dengan integrasi API untuk pengiriman data formulir (saat ini diarahkan ke Google Apps Script).
+
+SEO Ready: Memiliki konfigurasi dasar seperti sitemap.xml dan robots.txt.
+
+🛠️ Teknologi yang Digunakan
+Framework: Next.js (Version 15.x)
+
+Bahasa: TypeScript
+
+Styling: Tailwind CSS
+
+Animasi: Framer Motion dan AOS
+
+Linting: ESLint (next/core-web-vitals)
+
+Font: Geist, Geist Mono, Inter
+
+📋 Prasyarat Instalasi
+Pastikan Anda memiliki Node.js (versi 18.x atau yang lebih baru direkomendasikan) terinstal di sistem Anda.
+
+Clone repositori ini:
+
+Bash
+
+git clone [URL_REPO_ANDA]
+cd website-hakaes
+Instal dependencies:
+
+Bash
+
+npm install
+# atau
+yarn install
+Setup Environment Variables (Opsional, untuk form):
+
+Buat file .env.local di root project untuk menyimpan keys sensitif.
+
+# Contoh Environment Variables yang mungkin diperlukan (tergantung implementasi backend)
+# NEXT_PUBLIC_RECAPTCHA_SITE_KEY=xxx
+# RECAPTCHA_SECRET_KEY=xxx
+# SMTP_HOST=smtp.example.com
+# ...
+📁 Susunan Project
+Struktur folder utama mengikuti konvensi Next.js App Router:
+
+website-hakaes/
+├── public/                # Assets statis (gambar, logo, favicon, robots.txt, sitemap.xml)
+│   ├── image/
+│   ├── logo/
+│   ├── robots.txt
+│   └── sitemap.xml
+├── src/
+│   ├── app/               # Root App Router
+│   │   ├── api/           # Route Handlers (misalnya contact form)
+│   │   ├── services/      # Dynamic routes untuk setiap halaman layanan
+│   │   └── (routes utama: layout.tsx, page.tsx, not-found.tsx)
+│   ├── components/        # Komponen UI yang dapat digunakan kembali (Navbar, Footer, ContactUs, dll.)
+│   └── globals.css        # File styling global (Tailwind imports)
+├── .gitignore
+├── next.config.ts
+├── package.json
+└── tsconfig.json
+▶️ Contoh Penggunaan
+Untuk menjalankan server pengembangan secara lokal:
+
+Bash
+
 npm run dev
-# or
+# atau
 yarn dev
-# or
+# atau
 pnpm dev
-# or
+# atau
 bun dev
-```
+Buka http://localhost:3000 di browser Anda untuk melihat hasilnya.
 
-Open [http://localhost:3000](http://localhost:3000) with your browser to see the result.
+Untuk membuat production build:
 
-You can start editing the page by modifying `app/page.tsx`. The page auto-updates as you edit the file.
+Bash
 
-This project uses [`next/font`](https://nextjs.org/docs/app/building-your-application/optimizing/fonts) to automatically optimize and load [Geist](https://vercel.com/font), a new font family for Vercel.
-
-## Learn More
-
-To learn more about Next.js, take a look at the following resources:
-
-- [Next.js Documentation](https://nextjs.org/docs) - learn about Next.js features and API.
-- [Learn Next.js](https://nextjs.org/learn) - an interactive Next.js tutorial.
-
-You can check out [the Next.js GitHub repository](https://github.com/vercel/next.js) - your feedback and contributions are welcome!
-
-## Deploy on Vercel
-
-The easiest way to deploy your Next.js app is to use the [Vercel Platform](https://vercel.com/new?utm_medium=default-template&filter=next.js&utm_source=create-next-app&utm_campaign=create-next-app-readme) from the creators of Next.js.
-
-Check out our [Next.js deployment documentation](https://nextjs.org/docs/app/building-your-application/deploying) for more details.
+npm run build
+🤝 Kontribusi
+Kontribusi dipersilakan! Silakan buka issue atau kirim pull request dengan perbaikan bug atau penambahan fitur.
